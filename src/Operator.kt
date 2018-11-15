@@ -1,1 +1,1 @@
-class Operator (val name:String,val cost:Int,val parentNode:Node,val andNodes:ArrayList<Node>)
+class Operator(val name: String, var cost: Int, val parentNode: Node, val andNodes: ArrayList<Node>, var visited: Boolean)
