@@ -3,13 +3,8 @@ import kotlin.Comparator
 
 fun main(args: Array<String>) {
     val operatorComparator: Comparator<Operator> = kotlin.Comparator { o1: Operator, o2: Operator ->
-        when (o1.visited) {
-            true -> o1.cost
-            else -> o1.cost + o1.andNodes.sumBy { it.heuristic }
-        } - when (o2.visited) {
-            true -> o2.cost
-            else -> o2.cost + o2.andNodes.sumBy { it.heuristic }
-        }
+        (if (o1.visited) o1.cost else o1.cost + o1.andNodes.sumBy { it.heuristic })
+        -(if (o2.visited) o2.cost else o2.cost + o2.andNodes.sumBy { it.heuristic })
     }
     val p0 = Node("P0", 0, false, PriorityQueue(operatorComparator), 0)
     val p1 = Node("P1", 0, true, PriorityQueue(operatorComparator), null)

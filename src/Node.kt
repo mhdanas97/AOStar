@@ -10,10 +10,8 @@ class Node(val name: String, val heuristic: Int, val final: Boolean, val operato
         if (operators.isEmpty()) return false
         while (operators.isNotEmpty()) {
             val operator: Operator = operators.poll()
-            val originalCost: Int = when (operator.visited) {
-                true -> operator.cost
-                false -> operator.cost + operator.andNodes.sumBy { it.heuristic }
-            }
+            val originalCost: Int = if (operator.visited) operator.cost else
+                operator.cost + operator.andNodes.sumBy { it.heuristic }
             operator.visited = true
             operator.cost += this.cost as Int
             var andChildren = true
